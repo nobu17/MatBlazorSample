@@ -8,7 +8,7 @@
                     <MatList>
                         @foreach (var menu in this.MenuItems)
                         {
-                            <MatListItem OnClick="@(e => OnSelectMenu(menu.Item2))"> @menu.Item1</MatListItem>
+                        <MatListItem OnClick="@(e => OnSelectMenu(menu.Item2))"> @menu.Item1</MatListItem>
                         }
                     </MatList>
                 </MatMenu>
@@ -29,11 +29,10 @@
     protected override void OnInitialized()
     {
         MenuItems = new List<Tuple<string, string>>();
-        MenuItems.Add(Tuple.Create("Counter", "/counter"));
-        MenuItems.Add(Tuple.Create("LayoutGrid", "/grid"));
-        MenuItems.Add(Tuple.Create("AppBar", "/appbar"));
-        MenuItems.Add(Tuple.Create("Dialog", "/dialog"));
-        MenuItems.Add(Tuple.Create("Table", "/table"));
+        MenuItems.Add(Tuple.Create("LayoutGrid", "grid"));
+        MenuItems.Add(Tuple.Create("AppBar", "appbar"));
+        MenuItems.Add(Tuple.Create("Dialog", "dialog"));
+        MenuItems.Add(Tuple.Create("Table", "table"));
     }
 
     public void OnClickMenu(MouseEventArgs e)
