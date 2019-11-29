@@ -1,0 +1,43 @@
+﻿@page "/appbar"
+<MatAppBarContainer>
+    <MatAppBar Fixed="true">
+        <MatAppBarRow>
+            <MatAppBarSection>
+                <MatIconButton Icon="menu" OnClick="@OnClickMenu" @ref="Button"></MatIconButton>
+                <MatMenu @ref="Menu">
+                    <MatList>
+                        <MatListItem OnClick="@(e => OnSelectMenu("Item1"))">Item 1</MatListItem>
+                        <MatListItem OnClick="@(e => OnSelectMenu("Item2"))">Item 2</MatListItem>
+                        <MatListItem OnClick="@(e => OnSelectMenu("Item3"))">Item 3</MatListItem>
+                        <MatListItem OnClick="@(e => OnSelectMenu("Item4"))">Item 4</MatListItem>
+                        <MatListItem OnClick="@(e => OnSelectMenu("Item5"))">Item 5</MatListItem>
+                    </MatList>
+                </MatMenu>
+                <MatAppBarTitle>AppBarTest</MatAppBarTitle>
+            </MatAppBarSection>
+            <MatAppBarSection Align="@MatAppBarSectionAlign.End">
+                <MatIconButton Icon="favorite"></MatIconButton>
+            </MatAppBarSection>
+        </MatAppBarRow>
+    </MatAppBar>
+
+    <MatAppBarContent>
+        @content
+    </MatAppBarContent>
+</MatAppBarContainer>
+
+@code {
+    MatIconButton Button;
+    BaseMatMenu Menu;
+    private string content = "content";
+
+    public void OnClickMenu(MouseEventArgs e)
+    {
+        this.Menu.OpenAsync(Button.Ref);
+    }
+
+    public void OnSelectMenu(string content)
+    {
+        this.content = content;
+    }
+}

@@ -1,0 +1,68 @@
+﻿@page "/dialog"
+
+<div class="mat-layout-grid">
+    <div class="mat-layout-grid-inner">
+        <div class="mat-layout-grid-cell mat-layout-grid-cell-span-12 ">
+            <h3>Dialog</h3>
+        </div>
+        <div class="mat-layout-grid-cell mat-layout-grid-cell-span-3 ">
+            <MatButton OnClick="@(e => { okDialogIsOpen = true; })">OK Dialog</MatButton>
+        </div>
+        <div class="mat-layout-grid-cell mat-layout-grid-cell-span-3 ">
+            <MatButton OnClick="@(e => { okCancelDialogIsOpen = true; })">OKCancel Dialog</MatButton>
+        </div>
+        <div class="mat-layout-grid-cell mat-layout-grid-cell-span-3 ">
+            <MatButton OnClick="@(e => { inputDialogIsOpen = true; inputText = string.Empty; })">Input Dialog</MatButton>
+        </div>
+        <div class="mat-layout-grid-cell mat-layout-grid-cell-span-3 ">
+            <MatButton OnClick="@(e => { customDialogIsOpen = true; })">Custom Dialog</MatButton>
+        </div>
+        <div class="mat-layout-grid-cell mat-layout-grid-cell-span-12 ">
+            @result
+        </div>
+    </div>
+</div>
+<!-- ok dialog -->
+<MatDialog @bind-IsOpen="@okDialogIsOpen" CanBeClosed="false">
+    <MatDialogTitle>Title</MatDialogTitle>
+    <MatDialogContent>
+        <p>Message</p>
+    </MatDialogContent>
+    <MatDialogActions>
+        <MatButton OnClick="@(e => { okDialogIsOpen = false; })">OK</MatButton>
+    </MatDialogActions>
+</MatDialog>
+<!-- ok cancel dialog -->
+<MatDialog @bind-IsOpen="@okCancelDialogIsOpen" CanBeClosed="false">
+    <MatDialogTitle>Title</MatDialogTitle>
+    <MatDialogContent>
+        <p>Message</p>
+    </MatDialogContent>
+    <MatDialogActions>
+        <MatButton OnClick="@(e => { okCancelDialogIsOpen = false; result = "OK"; })">OK</MatButton>
+        <MatButton OnClick="@(e => { okCancelDialogIsOpen = false; result = "Cancel"; })">Cancel</MatButton>
+    </MatDialogActions>
+</MatDialog>
+<!-- ok cancel dialog -->
+<MatDialog @bind-IsOpen="@inputDialogIsOpen" CanBeClosed="false">
+    <MatDialogTitle>Title</MatDialogTitle>
+    <MatDialogContent>
+        <p>input text</p>
+        <MatTextField @bind-Value="@inputText"></MatTextField>
+    </MatDialogContent>
+    <MatDialogActions>
+        <MatButton OnClick="@(e => { inputDialogIsOpen = false; result = inputText; })">OK</MatButton>
+        <MatButton OnClick="@(e => { inputDialogIsOpen = false; })">Cancel</MatButton>
+    </MatDialogActions>
+</MatDialog>
+<!-- component dialog -->
+<OKCancelDialog IsDialogOpen="@customDialogIsOpen" Title="Test" Message="メッセージ"
+                ButtonAction="@(e => { customDialogIsOpen = false;  result = e.ToString(); })" />
+@code {
+    string result = string.Empty;
+    string inputText = string.Empty;
+    bool okDialogIsOpen = false;
+    bool okCancelDialogIsOpen = false;
+    bool inputDialogIsOpen = false;
+    bool customDialogIsOpen = false;
+}

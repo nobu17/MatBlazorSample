@@ -1,0 +1,37 @@
+﻿@page "/table"
+<h3>Table</h3>
+<MatTable Items="@PersonList" AllowSelection="true" Striped="true">
+    <MatTableHeader>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Job</th>
+    </MatTableHeader>
+    <MatTableRow>
+        <td>@context.Name</td>
+        <td>@context.Age</td>
+        <td>@context.Job</td>
+    </MatTableRow>
+</MatTable>
+
+@code {
+    class Person
+    {
+        public string Name { get; set; }
+
+        public int Age { get; set; }
+
+        public string Job { get; set; }
+    }
+
+    List<Person> PersonList;
+
+    protected override void OnInitialized()
+    {
+        PersonList = new List<Person>();
+        PersonList.Add(new Person() { Name = "A", Age = 40, Job = "社長" });
+        PersonList.Add(new Person() { Name = "B", Age = 23, Job = "NEET" });
+        PersonList.Add(new Person() { Name = "C", Age = 34, Job = "エンジニア" });
+        PersonList.Add(new Person() { Name = "D", Age = 50, Job = "隠居" });
+    }
+
+}
