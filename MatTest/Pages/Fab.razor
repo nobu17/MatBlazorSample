@@ -1,0 +1,100 @@
+﻿@page "/fab"
+<style>
+    .app-fab--absolute {
+        position: fixed;
+        bottom: 1rem;
+        right: 1rem;
+    }
+</style>
+<div class="mat-layout-grid">
+    <div class="mat-layout-grid-inner">
+        <div class="mat-layout-grid-cell mat-layout-grid-cell-span-12">
+            <h3 align="center">Fab</h3>
+        </div>
+        <div class="mat-layout-grid-cell mat-layout-grid-cell-span-12">
+            <h4 align="left">Show Label</h4>
+        </div>
+        <div class="mat-layout-grid-cell mat-layout-grid-cell-span-12">
+            <MatSlideToggle CheckedChanged="@OnChangeDisplayToggle"></MatSlideToggle>
+        </div>
+        <div class="mat-layout-grid-cell mat-layout-grid-cell-span-12">
+            <h4 align="left">Mini</h4>
+        </div>
+        <div class="mat-layout-grid-cell mat-layout-grid-cell-span-12">
+            <MatSlideToggle @bind-Checked="@isMini"></MatSlideToggle>
+        </div>
+        <div class="mat-layout-grid-cell mat-layout-grid-cell-span-12">
+            <h4 align="left">Icon</h4>
+        </div>
+        <div class="mat-layout-grid-cell mat-layout-grid-cell-span-12">
+            @if (isLoadingIcon)
+            {
+                <h4 align="center">Loading Icon...</h4>
+            }
+            else
+            {
+                foreach (var ico in IconList)
+                {
+                    <MatButton Outlined="true" Icon="@ico" OnClick="@(e => ChangeFabIcon(ico))">@ico</MatButton>
+                }
+            }
+        </div>
+    </div>
+    <MatFAB Class="app-fab--absolute" Icon="@Icon" Label="@Label" Mini="@isMini"></MatFAB>
+</div>
+
+
+@code {
+    List<string> IconList;
+    bool isLoadingIcon = true;
+    string Icon = MatIconNames.Favorite;
+    string Label = null;
+    bool isDisplayLabel = false;
+    bool isMini = false;
+    void ChangeFabIcon(string icon)
+    {
+        Icon = icon;
+        ChangeLabel();
+    }
+
+    void OnChangeDisplayToggle(bool toggle)
+    {
+        isDisplayLabel = toggle;
+        ChangeLabel();
+    }
+
+    void ChangeLabel()
+    {
+        if (isDisplayLabel)
+        {
+            Label = Icon;
+        }
+        else
+        {
+            // if using string.empty, some space is appear
+            Label = null;
+        }
+    }
+
+
+    protected async override Task OnInitializedAsync()
+    {
+        await Task.Run(() =>
+        {
+            var list = new List<string>();
+            foreach (var prop in typeof(MatIconNames).GetProperties(BindingFlags.Static | BindingFlags.Public).Take(50))
+            {
+                if (prop.PropertyType == typeof(string))
+                {
+                    var iconString = prop.GetValue(typeof(MatIconNames), null) as string;
+                    if (!string.IsNullOrWhiteSpace(iconString))
+                    {
+                        list.Add(iconString);
+                    }
+                }
+            }
+            IconList = list;
+            isLoadingIcon = false;
+        });
+    }
+}
