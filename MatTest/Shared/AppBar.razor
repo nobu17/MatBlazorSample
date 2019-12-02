@@ -1,25 +1,23 @@
 ﻿@inject NavigationManager Navigation
-<MatAppBarContainer>
-    <MatAppBar Fixed="true">
-        <MatAppBarRow>
-            <MatAppBarSection>
-                <MatIconButton Icon="menu" OnClick="@OnClickMenu" @ref="Button"></MatIconButton>
-                <MatMenu @ref="Menu">
-                    <MatList>
-                        @foreach (var menu in this.MenuItems)
+<MatAppBar Fixed="true">
+    <MatAppBarRow>
+        <MatAppBarSection>
+            <MatIconButton Icon="menu" OnClick="@OnClickMenu" @ref="Button"></MatIconButton>
+            <MatMenu @ref="Menu">
+                <MatList>
+                    @foreach (var menu in this.MenuItems)
                         {
-                        <MatListItem OnClick="@(e => OnSelectMenu(menu.Item2))"> @menu.Item1</MatListItem>
+                    <MatListItem OnClick="@(e => OnSelectMenu(menu.Item2))"> @menu.Item1</MatListItem>
                         }
-                    </MatList>
-                </MatMenu>
-                <MatAppBarTitle>AppBarTest</MatAppBarTitle>
-            </MatAppBarSection>
-            <MatAppBarSection Align="@MatAppBarSectionAlign.End">
-                <MatIconButton Icon="favorite"></MatIconButton>
-            </MatAppBarSection>
-        </MatAppBarRow>
-    </MatAppBar>
-</MatAppBarContainer>
+                </MatList>
+            </MatMenu>
+            <MatAppBarTitle>AppBarTest</MatAppBarTitle>
+        </MatAppBarSection>
+        <MatAppBarSection Align="@MatAppBarSectionAlign.End">
+            <MatIconButton Icon="favorite"></MatIconButton>
+        </MatAppBarSection>
+    </MatAppBarRow>
+</MatAppBar>
 
 @code {
     MatIconButton Button;
