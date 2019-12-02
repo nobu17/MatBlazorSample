@@ -1,17 +1,26 @@
 ﻿@page "/table"
-<h3>Table</h3>
-<MatTable Items="@PersonList" AllowSelection="true" Striped="true">
-    <MatTableHeader>
-        <th>Name</th>
-        <th>Age</th>
-        <th>Job</th>
-    </MatTableHeader>
-    <MatTableRow>
-        <td>@context.Name</td>
-        <td>@context.Age</td>
-        <td>@context.Job</td>
-    </MatTableRow>
-</MatTable>
+<div class="mat-layout-grid">
+    <div class="mat-layout-grid-inner">
+        <div class="mat-layout-grid-cell mat-layout-grid-cell-span-12 ">
+            <h3 align="center">Table</h3>
+        </div>
+        <div class="mat-layout-grid-cell mat-layout-grid-cell-span-12">
+            <MatTable Items="@PersonList" AllowSelection="true" Striped="true">
+                <MatTableHeader>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Job</th>
+                </MatTableHeader>
+                <MatTableRow>
+                    <td>@context.Name</td>
+                    <td>@context.Age</td>
+                    <td>@context.Job</td>
+                </MatTableRow>
+            </MatTable>
+        </div>
+    </div>
+</div>
+
 
 @code {
     class Person
