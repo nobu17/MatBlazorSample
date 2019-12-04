@@ -1,0 +1,17 @@
+﻿@inherits MatTest.Models.Form.Form3ViewModel
+
+<EditForm Model="@LoginData" OnValidSubmit="@HandleValidSubmit" class="mat-layout-grid-cell mat-layout-grid-cell-span-12">
+    <FluentValidationValidator />
+    <ValidationSummary />
+    <div class="mat-layout-grid-inner">
+        <div class="mat-layout-grid-cell mat-layout-grid-cell-span-12">
+            <MatTextField FullWidth="true" Label="UserID" @bind-Value="@LoginData.UserID"></MatTextField>
+        </div>
+        <div class="mat-layout-grid-cell mat-layout-grid-cell-span-12">
+            <MatTextField FullWidth="true" Label="Password" @bind-Value="@LoginData.Password" Type="password"></MatTextField>
+        </div>
+        <div class="mat-layout-grid-cell mat-layout-grid-cell-span-12 mat-layout-grid-align-right">
+            <MatButton Label="Login" Outlined="true" Type="submit"></MatButton>
+        </div>
+    </div>
+</EditForm>
